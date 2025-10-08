@@ -24,6 +24,7 @@ public class AccountPage {
 	private final By logoutLink = By.linkText("Logout");
 	private final By search = By.name("search");
 	private final By searchIcon = By.cssSelector("div#search button");
+	private final By searchIcon1 = By.cssSelector("div#search button");
 
 	public List<String> getAccPageHeaders() {
 
