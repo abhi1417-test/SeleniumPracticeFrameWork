@@ -30,7 +30,7 @@
 		</classes>
 	</test>
 
-	<test name="Login Page Test">
+	<test name="Login Page Test-edge">
 		<parameter name="browser" value="edge" />
 
 		<classes>
