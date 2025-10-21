@@ -30,6 +30,8 @@ public class RegisterPageTest  extends BaseTest{
 		}
 		
 		
+		
+		
 		@DataProvider
 		public Object[][] getRegSheetData() {
 			return ExcelUtil.getTestData("register");
