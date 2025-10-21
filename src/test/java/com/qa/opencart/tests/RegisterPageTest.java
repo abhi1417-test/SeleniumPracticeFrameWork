@@ -42,7 +42,7 @@ public class RegisterPageTest  extends BaseTest{
 		}
 		
 		
-		@Test(dataProvider = "getRegSheetData")
+		@Test(dataProvider = "getRegCSVData")
 		public void registerTest(String firstName, String lastName, String telephone, String password, String subscribe) {
 			Assert.assertTrue
 			(registerPage.userRegister(firstName, lastName, StringUtils.getRandomEmails(), telephone, password, subscribe));
