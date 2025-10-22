@@ -39,7 +39,7 @@ pipeline
         stage('Regression Automation Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/abhi1417-test/SeleniumPracticeFrameWork'
+                    git 'https://github.com/abhi1417-test/SeleniumPracticeFrameWork.git'
                     batch "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regression.xml -Denv=qa"
                     
                 }
@@ -85,7 +85,7 @@ pipeline
         stage('Sanity Automation Test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/abhi1417-test/SeleniumPracticeFrameWork'
+                    git 'https://github.com/abhi1417-test/SeleniumPracticeFrameWork.git'
                     batch "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=stage"
                     
                 }
@@ -117,7 +117,7 @@ pipeline
         stage('Sanity Automation Test on PROD') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/abhi1417-test/SeleniumPracticeFrameWork'
+                    git 'https://github.com/abhi1417-test/SeleniumPracticeFrameWork.git'
                     batch "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=prod"
                     
                 }
