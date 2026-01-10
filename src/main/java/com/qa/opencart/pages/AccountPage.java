@@ -11,7 +11,7 @@ import com.qa.opencart.constant.AppConstant;
 import com.qa.opencart.util.ElementUtil;
 
 public class AccountPage {
-	
+
 	private WebDriver driver;
 	private ElementUtil eleUtil;
 
@@ -24,7 +24,6 @@ public class AccountPage {
 	private final By logoutLink = By.linkText("Logout");
 	private final By search = By.name("search");
 	private final By searchIcon = By.cssSelector("div#search button");
-	private final By searchIcon1 = By.cssSelector("div#search button");
 
 	public List<String> getAccPageHeaders() {
 
@@ -52,8 +51,14 @@ public class AccountPage {
 		return new SearchReasultPage(driver);
 		
 	}
-		
-		
-	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

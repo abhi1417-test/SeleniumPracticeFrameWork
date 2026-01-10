@@ -8,8 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -23,29 +23,33 @@ import com.qa.opencart.error.AppError;
 import com.qa.opencart.exception.FrameworkException;
 
 public class DriverFactory {
-	
+
 	public WebDriver driver;
 	public Properties prop;
+
 	public static String highlightEle;
-	public OptionsManager optionsManager;
-	
-	public static final ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
+
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
+
 	private static final Logger log = LogManager.getLogger(DriverFactory.class);
+
+	public OptionsManager optionsManager;
+
 	/**
-	 * This method is returning browser 
+	 * This method is init the driver on the basis of browser...
+	 * 
 	 * @param browserName
-	 * @return
+	 * @return it returns driver
 	 */
-	
 	public WebDriver initDriver(Properties prop) {
-		
+
 		String browserName = prop.getProperty("browser");
-		log.info("browser Name  :" +  browserName);
-		//System.out.println("browser Name  :" +  browserName);
-		
+		// System.out.println("browser name : " + browserName);
+		log.info("browser name ::: " + browserName);
+
 		highlightEle = prop.getProperty("highlight");
 		optionsManager = new OptionsManager(prop);
-		
+
 		boolean remoteExeution = Boolean.parseBoolean(prop.getProperty("remote"));
 
 		switch (browserName.trim().toLowerCase()) {
@@ -86,15 +90,20 @@ public class DriverFactory {
 			throw new FrameworkException("=====INVALID BROWSER====");
 
 		}
-		
+
 		getDriver().manage().deleteAllCookies();
-		getDriver().manage().window().fullscreen();
+		getDriver().manage().window().maximize();
 		getDriver().get(prop.getProperty("url"));
-		
+
 		return getDriver();
-		
+
 	}
-	
+
+	/**
+	 * this is used to init the remote webdriver with selenium grid
+	 * 
+	 * @param string
+	 */
 	private void init_remoteDriver(String browserName) {
 		log.info("Running tests on selenoum grid --"+ browserName);
 
@@ -123,81 +132,81 @@ public class DriverFactory {
 			e.printStackTrace();
 		}
 
-		
 	}
 
 	/**
-	 * this is used to get local copy of the driver anytime..
+	 * this is used to get the local copy of the driver any time..
+	 * 
 	 * @return
 	 */
-	
-	public static WebDriver getDriver()
-	{
-	     return tlDriver.get();
+	public static WebDriver getDriver() {
+		return tlDriver.get();
 	}
-	
+
 	/**
-	 * This method is initializing properties file value
-	 * @return 
+	 * This method is init the prop with properties file...
+	 * 
+	 * @return
 	 */
-	
+
+	// mvn clean install -Denv="qa"
+	// mvn clean install
+	// mvn clean install
+	// -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regression.xml
+	// -Denv="dev"
 	public Properties initProp() {
-		
 		prop = new Properties();
 		FileInputStream ip = null;
-		
-		/**
-		 * System.getProperty("env") in this env wiil be passed from the maven 
-		 *  from cli command  mvn clean install -Denv="qa"
-		 * 
-		 */
+
 		String envName = System.getProperty("env");
-		log.info("Env name  : " + envName);
-		
-		
+		log.info("Env name =======>" + envName);
+
 		try {
-		if(envName == null)
-		{
-			log.info("no env ... is passes , hence running testcases on QA env...");
-			ip = new FileInputStream("./src/test/resources/config/config.qa.properties");
-		}
-		
-		else {
-			switch (envName) {
-			case "qa":
+			if (envName == null) {
+				log.warn("no env.. is passed, hence running tcs on QA environment...by default..");
 				ip = new FileInputStream("./src/test/resources/config/config.qa.properties");
-				break;
-			case "stage":
-				ip = new FileInputStream("./src/test/resources/config/config.stage.properties");
-				break;
-			case "prod":
-				ip = new FileInputStream("./src/test/resources/config/config.properties");
-				break;
-			case "demo":
-				ip = new FileInputStream("./src/test/resources/config/config.properties");
-				break;
+			}
+
+			else {
+				switch (envName.trim().toLowerCase()) {
+				case "qa":
+					ip = new FileInputStream("./src/test/resources/config/config.qa.properties");
+					break;
+				case "stage":
+					ip = new FileInputStream("./src/test/resources/config/config.stage.properties");
+					break;
+				case "uat":
+					ip = new FileInputStream("./src/test/resources/config/config.uat.properties");
+					break;
+				case "dev":
+					ip = new FileInputStream("./src/test/resources/config/config.dev.properties");
+					break;
+				case "prod":
+					ip = new FileInputStream("./src/test/resources/config/config.properties");
+					break;
 				default:
-					log.error("env value is invalid");
-			}   
-		}
-		}
-		catch (FileNotFoundException e) {
+					log.error("Env value is invalid...plz pass the right env value..");
+					throw new FrameworkException("====INVALID ENVIRONMENT====");
+				}
+			}
+
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
 		try {
 			prop.load(ip);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		return prop;
-		
 	}
-	
+
 	/**
-	 * take screen shot
-	 * @return
+	 * takescreenshot
 	 */
-	
+
 	public static File getScreenshotFile() {
 		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);// temp dir
 		return srcFile;
@@ -212,27 +221,5 @@ public class DriverFactory {
 		return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BASE64);// temp dir
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

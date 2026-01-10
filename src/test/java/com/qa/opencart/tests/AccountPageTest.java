@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constant.AppConstant;
 
-
 public class AccountPageTest extends BaseTest {
+	//  BT --> BC -> @Test	
 	
 	@BeforeClass
 	public void accPageSetup() {
@@ -29,4 +29,6 @@ public class AccountPageTest extends BaseTest {
 		Assert.assertEquals(actHeadersList.size(), AppConstant.ACC_PAGE_HEADERS_COUNT);
 		Assert.assertEquals(actHeadersList, AppConstant.expectedAccPageHeadersList);
 	}
+	
+	
 }

@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 import com.qa.opencart.base.BaseTest;
 
 public class LoginPageNegativeTest extends BaseTest {
-
+	
+	
 	
 	@DataProvider
 	public Object[][] getNegativeLoginData() {
@@ -25,5 +26,6 @@ public class LoginPageNegativeTest extends BaseTest {
 	public void negativeLoginTest(String invalidUN, String invalidPWD) {
 		Assert.assertTrue(loginPage.doLoginWithInvalidCredentails(invalidUN, invalidPWD));
 	}
-	
+
 }
+

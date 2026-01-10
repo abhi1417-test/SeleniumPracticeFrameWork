@@ -6,12 +6,12 @@ import org.openqa.selenium.WebDriver;
 import com.qa.opencart.constant.AppConstant;
 import com.qa.opencart.util.ElementUtil;
 
-public class RegitserLoginPage {
+public class RegisterPage {
 	
 	private WebDriver driver;
 	private ElementUtil eleUtil;
 	
-	public RegitserLoginPage(WebDriver driver)
+	public RegisterPage(WebDriver driver)
 	{
 		this.driver = driver;
 		eleUtil = new ElementUtil(driver);

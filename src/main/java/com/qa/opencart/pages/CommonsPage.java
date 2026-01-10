@@ -11,7 +11,7 @@ import com.qa.opencart.constant.AppConstant;
 import com.qa.opencart.util.ElementUtil;
 
 public class CommonsPage {
-	
+
 	private WebDriver driver;
 	private ElementUtil eleUtil;
 

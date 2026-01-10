@@ -1,17 +1,19 @@
 package com.qa.opencart.pages;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.qa.opencart.constant.AppConstant;
+import com.qa.opencart.constant.AppConstant;
 import com.qa.opencart.util.ElementUtil;
 
-public class LoginPage{
-	
+import io.qameta.allure.Step;
+
+public class LoginPage {
+
 	private WebDriver driver;
 	private ElementUtil eleUtil;
 
@@ -26,7 +28,7 @@ public class LoginPage{
 
 	private final By loginErrorMessg = By.cssSelector("div.alert.alert-danger.alert-dismissible");
 
-	//private static final Logger log = LogManager.getLogger(LoginPage.class);
+	private static final Logger log = LogManager.getLogger(LoginPage.class);
 
 	// public constructor
 	public LoginPage(WebDriver driver) {
@@ -37,51 +39,51 @@ public class LoginPage{
 
 	// public page methods/actions
 
-	
+	@Step("getting login page title....")
 	public String getLoginPageTitle() {
 		String title = eleUtil.waitForTitleIs(AppConstant.LOGIN_PAGE_TITLE, AppConstant.DEFAULT_SHORT_WAIT);
 		// System.out.println("login page title: "+ title);
-		//log.info("login page title: " + title);
+		log.info("login page title: " + title);
 		return title;
 	}
 
-	
+	@Step("getting login url title....")
 	public String getLoginPageURL() {
 		String url = eleUtil.waitForURLContains(AppConstant.LOGIN_PAGE_FRACTION_URL, AppConstant.DEFAULT_SHORT_WAIT);
 		// System.out.println("login page url: "+ url);
-		//log.info("login page url : " + url);
+		log.info("login page url : " + url);
 		return url;
 	}
 
-	
+	@Step("forgot pwd link exist...")
 	public boolean isForgotPwdLinkExist() {
 		return eleUtil.isElementDisplayed(forgotPwdLink);
 	}
 
-	
+	@Step("page header exist...")
 	public boolean isheaderExist() {
 		return eleUtil.isElementDisplayed(header);
 	}
 
-	
+	@Step("login with correct username: {0} and password: {1}")
 	public AccountPage doLogin(String appUsername, String appPassword) {
-		//log.info("application credentials: " + appUsername + " : " + "*********");
+		log.info("application credentials: " + appUsername + " : " + "*********");
 		eleUtil.waitForElementVisible(emailID, AppConstant.DEFAULT_MEDIUM_WAIT).sendKeys(appUsername);
 		eleUtil.doSendKeys(password, appPassword);
 		eleUtil.doClick(loginBtn);
 		return new AccountPage(driver);
 	}
 
-	
+	@Step("login with in-correct username: {0} and password: {1}")
 	public boolean doLoginWithInvalidCredentails(String invalidUN, String invalidPWD) {
-		//log.info("Invalid application credentials: " + invalidUN + " : " + invalidPWD);
+		log.info("Invalid application credentials: " + invalidUN + " : " + invalidPWD);
 		WebElement emailEle = eleUtil.waitForElementVisible(emailID, AppConstant.DEFAULT_MEDIUM_WAIT);
 		emailEle.clear();
 		emailEle.sendKeys(invalidUN);
 		eleUtil.doSendKeys(password, invalidPWD);
 		eleUtil.doClick(loginBtn);
 		String errorMessg = eleUtil.doElementGetText(loginErrorMessg);
-		//log.info("invalid creds error messg: " + errorMessg);
+		log.info("invalid creds error messg: " + errorMessg);
 		if (errorMessg.contains(AppConstant.LOGIN_BLANK_CREDS_MESSG)) {
 			return true;
 		}
@@ -91,13 +93,11 @@ public class LoginPage{
 		return false;
 	}
 
-	
-	public RegitserLoginPage navigateToRegisterPage() {
-		//log.info("trying to navigating to register page...");
+	@Step("navigating to register page...")
+	public RegisterPage navigateToRegisterPage() {
+		log.info("trying to navigating to register page...");
 		eleUtil.waitForElementVisible(registerLink, AppConstant.DEFAULT_SHORT_WAIT).click();
-		return new RegitserLoginPage(driver);
+		return new RegisterPage(driver);
 	}
-	
-	 
 
 }

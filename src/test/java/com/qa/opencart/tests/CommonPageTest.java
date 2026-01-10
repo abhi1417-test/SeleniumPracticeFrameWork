@@ -8,8 +8,9 @@ import org.testng.asserts.SoftAssert;
 import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constant.AppConstant;
 
-public class CommonPageTest  extends BaseTest{
+public class CommonPageTest extends BaseTest{
 
+	
 	@Test
 	public void checkCommonElementsOnLoginPageTest() {
 		SoftAssert softAssert = new SoftAssert();
@@ -30,4 +31,7 @@ public class CommonPageTest  extends BaseTest{
 		softAssert.assertEquals(footerList.size(), AppConstant.DEFAULT_FOOTER_LINKS_COUNT);
 		softAssert.assertAll();
 	}
+	
+	
+	
 }

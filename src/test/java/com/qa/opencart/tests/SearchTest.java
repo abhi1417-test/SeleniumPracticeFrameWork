@@ -6,25 +6,23 @@ import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 
-public class SearchTest extends BaseTest{
-	
-	
-//testNg executin for annotation
+public class SearchTest extends BaseTest {
+
 	// BT(chrome+url) -> BC(login) --> @Test
 
-		@BeforeClass
-		public void searchSetup() {
-			accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
-		}
+	@BeforeClass
+	public void searchSetup() {
+		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
+	}
+
 	@Test
 	public void searchTest() {
-		searchResultPage = accPage.doSearch("macbook");
-		productInfoPage= searchResultPage.selectProduct("MacBook Pro");
-		String header = productInfoPage.getProductHeader();
-		Assert.assertEquals(header, "MacBook Pro");
-		
+		searchResultsPage = accPage.doSearch("macbook");
+		productInfoPage = searchResultsPage.selectProduct("MacBook Pro");
+		String actHeader = productInfoPage.getProductHeader();
+		Assert.assertEquals(actHeader, "MacBook Pro");
 	}
+
 	
-	
-	
+
 }

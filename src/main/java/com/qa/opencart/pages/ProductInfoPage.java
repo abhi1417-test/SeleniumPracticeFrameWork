@@ -12,7 +12,7 @@ import com.qa.opencart.constant.AppConstant;
 import com.qa.opencart.util.ElementUtil;
 
 public class ProductInfoPage {
-	
+
 	private WebDriver driver;
 	private ElementUtil eleUtil;
 
@@ -88,19 +88,5 @@ public class ProductInfoPage {
 		productMap.put("extaxprice", exTaxValue);
 
 	}
-
-	
-	
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 public class AppConstant {
 	
-	
 	public static final int DEFAULT_SHORT_WAIT = 5;
 	public static final int DEFAULT_MEDIUM_WAIT = 10;
 	public static final int DEFAULT_LARGE_WAIT = 20;	
@@ -30,6 +29,4 @@ public class AppConstant {
 																	"My Orders",
 																	"My Affiliate Account",
 																	"Newsletter");
-
-
 }
