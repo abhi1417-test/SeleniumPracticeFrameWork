@@ -27,5 +27,6 @@ public class LoginPageNegativeTest extends BaseTest {
 		Assert.assertTrue(loginPage.doLoginWithInvalidCredentails(invalidUN, invalidPWD));
 	}
 
+	
 }
 
