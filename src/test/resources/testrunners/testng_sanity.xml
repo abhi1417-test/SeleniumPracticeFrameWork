@@ -9,7 +9,7 @@
 		<listener
 			class-name="com.qa.opencart.listener.TestAllureListener" />
 		<listener
-			class-name="com.qa.opencart.listeners.AnnotationTransformer" />
+			class-name="com.qa.opencart.listener.AnnotationTransformer" />
 
 	</listeners>
 
