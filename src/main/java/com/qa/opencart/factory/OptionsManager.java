@@ -36,6 +36,9 @@ private static final Logger log = LogManager.getLogger(OptionsManager.class);
 			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
 				co.setCapability("browserName", "chrome");
 			}
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				co.setCapability("browserName", "chrome");
+			}
 			return co;
 		
 	  }	
@@ -52,6 +55,9 @@ private static final Logger log = LogManager.getLogger(OptionsManager.class);
 				if(Boolean.parseBoolean(prop.getProperty("remote"))) {
 					fo.setCapability("browserName", "firefox");
 				}
+				if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+					fo.setCapability("browserName", "firefox");
+				}
 				return fo;
 			}
 
@@ -64,6 +70,9 @@ private static final Logger log = LogManager.getLogger(OptionsManager.class);
 				if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
 					log.info("Running tests in incognito mode");
 					eo.addArguments("--inPrivate");
+				}
+				if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+					eo.setCapability("browserName", "edge");
 				}
 				if(Boolean.parseBoolean(prop.getProperty("remote"))) {
 					eo.setCapability("browserName", "edge");
